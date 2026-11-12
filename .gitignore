@@ -1,3 +1,29 @@
+# Dependencias
 node_modules/
-package-lock.json
+
+# Variables de entorno (¡NUNCA subir secretos!)
 .env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Datos locales (la memoria en disco no se sube)
+data/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editor
+.vscode/
+.idea/
+
+# Coverage de tests
+coverage/
