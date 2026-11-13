@@ -6,6 +6,7 @@
   <title>BEE</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/code-block.css">
   <!-- Favicon opcional -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
 </head>
@@ -51,6 +52,7 @@
           maxlength="1000"
           required
         ></textarea>
+        <button type="button" id="voice-btn" class="ghost-btn" title="Dictar por voz">🎙️</button>
         <button type="submit" id="send-btn" class="send-btn">
           <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
             <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
@@ -61,5 +63,7 @@
   </div>
 
   <script src="js/app.js"></script>
+  <script src="js/markdown.js"></script>
+  <script src="js/clipboard.js"></script>
 </body>
 </html>

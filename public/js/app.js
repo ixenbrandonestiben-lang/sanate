@@ -37,20 +37,21 @@ const clearChatBtn = document.getElementById('clear-chat-btn');
  */
 function addMessageToUI(role, text) {
   const messageDiv = document.createElement('div');
-  // Agregamos 'animate-in' para que el mensaje se deslice suavemente
   messageDiv.className = `message ${role} animate-in`;
   
   const time = new Date().toLocaleTimeString('es-GT', { hour: '2-digit', minute: '2-digit' });
   
+  // 👇 AQUÍ ESTÁ LA MAGIA: Pasamos el texto por el traductor
+  const formattedText = parseMarkdown(text);
+  
   messageDiv.innerHTML = `
-    <div class="message-content">${escapeHtml(text)}</div>
+    <div class="message-content">${formattedText}</div>
     <span class="message-time">${time}</span>
   `;
   
   chatMessages.appendChild(messageDiv);
   scrollToBottom();
 }
-
 /**
  * Muestra el indicador de "escribiendo..."
  */
