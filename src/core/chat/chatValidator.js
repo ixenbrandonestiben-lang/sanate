@@ -18,9 +18,10 @@ const chatMessageSchema = z.object({
     .max(LIMITS.maxMessageLength, `El mensaje no puede superar ${LIMITS.maxMessageLength} caracteres`),
   
   persona: z
-    .enum(['MAJE', 'FORMAL', 'VEDOR'])
+    .enum(['MAJE', 'FORMAL', 'VEDOR', 'VENDEDOR'])
     .optional()
-    .default('MAJE'),
+    .default('MAJE')
+    .transform((persona) => persona === 'VEDOR' ? 'VENDEDOR' : persona),
 });
 
 /**
@@ -34,7 +35,7 @@ export const validateChatMessage = (data) => {
     return chatMessageSchema.parse(data);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      const messages = error.errors.map((e) => e.message).join(', ');
+      const messages = error.issues.map((issue) => issue.message).join(', ');
       const validationError = new Error(`Validación fallida: ${messages}`);
       validationError.status = 400;
       throw validationError;

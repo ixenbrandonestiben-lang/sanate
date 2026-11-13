@@ -10,6 +10,13 @@ import { PATHS } from '../../config/constants.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const MEMORY_FILE = path.join(__dirname, '../../../', PATHS.memoryFile);
+let writeQueue = Promise.resolve();
+
+const serializeWrite = (operation) => {
+  const result = writeQueue.then(operation, operation);
+  writeQueue = result.then(() => undefined, () => undefined);
+  return result;
+};
 
 /**
  * Lee toda la memoria desde el archivo JSON.
@@ -33,7 +40,9 @@ const readMemoryFile = async () => {
  * Escribe la memoria completa en el archivo JSON.
  */
 const writeMemoryFile = async (data) => {
-  await fs.writeFile(MEMORY_FILE, JSON.stringify(data, null, 2));
+  const temporaryFile = `${MEMORY_FILE}.${process.pid}.tmp`;
+  await fs.writeFile(temporaryFile, JSON.stringify(data, null, 2));
+  await fs.rename(temporaryFile, MEMORY_FILE);
 };
 
 /**
@@ -52,21 +61,33 @@ export const getUserData = async (userId) => {
  * @param {Object} userData - Datos a guardar
  */
 export const setUserData = async (userId, userData) => {
-  const memory = await readMemoryFile();
-  memory[userId] = {
-    ...memory[userId],
+  return updateUserData(userId, (currentUser) => ({
+    ...currentUser,
     ...userData,
-    updatedAt: new Date().toISOString(),
-  };
-  await writeMemoryFile(memory);
+  }));
 };
+
+export const updateUserData = (userId, update) => serializeWrite(async () => {
+  const memory = await readMemoryFile();
+  const updatedUser = update(memory[userId] || null);
+
+  if (updatedUser) {
+    memory[userId] = {
+      ...updatedUser,
+      updatedAt: new Date().toISOString(),
+    };
+  } else {
+    delete memory[userId];
+  }
+
+  await writeMemoryFile(memory);
+  return memory[userId] || null;
+});
 
 /**
  * Elimina todos los datos de un usuario.
  * @param {string} userId - ID del usuario
  */
 export const deleteUserData = async (userId) => {
-  const memory = await readMemoryFile();
-  delete memory[userId];
-  await writeMemoryFile(memory);
+  await updateUserData(userId, () => null);
 };

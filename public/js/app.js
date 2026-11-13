@@ -87,6 +87,7 @@ function escapeHtml(text) {
 function setLoading(isLoading) {
   messageInput.disabled = isLoading;
   sendBtn.disabled = isLoading;
+  clearChatBtn.disabled = isLoading;
   if (!isLoading) {
     messageInput.focus();
   }
@@ -139,7 +140,7 @@ async function handleSendMessage(e) {
   } catch (error) {
     console.error('[FRONTEND ERROR]', error);
     hideTyping();
-    addMessageToUI('bot', 'Ala maje, se me fue el internet o el server está caído. Perame un toque y volvé a intentar. 🥲');
+    addMessageToUI('bot', error.message || 'Ala maje, se me fue el internet o el server está caído. Perame un toque y volvé a intentar. 🥲');
   } finally {
     setLoading(false);
   }
@@ -151,27 +152,28 @@ async function handleSendMessage(e) {
 async function handleClearChat() {
   if (!confirm('¿Seguro que querés borrar toda la conversación, maje?')) return;
 
+  setLoading(true);
   try {
-    const response = await fetch(`${API_URL}/${userId}`, {
+    const response = await fetch(`${API_URL}/${encodeURIComponent(userId)}`, {
       method: 'DELETE',
     });
+    const result = await response.json();
 
-    if (response.ok) {
-      // Limpiar UI (dejamos solo el mensaje de bienvenida)
-      chatMessages.innerHTML = `
-        <div class="message bot">
-          <div class="message-content">
-            ¡Memoria borrada, maje! Empezamos de cero. ¿En qué te ayudo?
-          </div>
-          <span class="message-time">Ahora</span>
-        </div>
-      `;
-    } else {
-      alert('No se pudo borrar el historial. Intentá de nuevo.');
+    if (!response.ok) {
+      throw new Error(result.error || `Error ${response.status}`);
     }
+
+    chatMessages.innerHTML = `
+      <div class="message bot">
+        <div class="message-content">¡Memoria borrada, maje! Empezamos de cero. ¿En qué te ayudo?</div>
+        <span class="message-time">Ahora</span>
+      </div>
+    `;
   } catch (error) {
     console.error('[CLEAR ERROR]', error);
-    alert('Error de conexión al borrar el chat.');
+    addMessageToUI('bot', `No se pudo borrar la conversación: ${error.message}`);
+  } finally {
+    setLoading(false);
   }
 }
 

@@ -11,6 +11,7 @@ export const LIMITS = {
   maxHistoryLength: 20,      // Mensajes a mantener en memoria por usuario
   summaryThreshold: 20,      // A partir de acá se resume el historial viejo
   recentMessages: 10,        // Mensajes recientes que siempre se mandan completos
+  maxSummaryLength: 3000,    // Evita que el resumen crezca sin límite
   maxRequestSize: '10kb',    // Límite del payload HTTP
 };
 

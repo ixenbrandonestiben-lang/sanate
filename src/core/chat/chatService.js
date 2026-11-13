@@ -50,10 +50,8 @@ export const processChatMessage = async (rawData) => {
   const formattedResponse = formatResponse(aiResponse);
 
   // 7. Guardar mensaje del usuario y respuesta del bot en historial
-  await Promise.all([
-    addMessageToHistory(userId, 'user', cleanMessage),
-    addMessageToHistory(userId, 'assistant', formattedResponse),
-  ]);
+  await addMessageToHistory(userId, 'user', cleanMessage);
+  await addMessageToHistory(userId, 'assistant', formattedResponse);
 
   // 8. Devolver respuesta con metadata
   return {

@@ -5,8 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon serve.js",
+    "dev": "nodemon server.js",
     "lint": "eslint .",
+    "test": "node --test",
     "format": "prettier --write ."
   },
   "repository": {

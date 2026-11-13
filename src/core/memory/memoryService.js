@@ -2,8 +2,17 @@
 // Lógica de memoria: gestiona historial de mensajes y extracción de "hechos".
 // Este servicio decide QUÉ recordar y CÓMO organizarlo.
 
-import { getUserData, setUserData, deleteUserData } from './memoryStore.js';
+import { getUserData, updateUserData, deleteUserData } from './memoryStore.js';
 import { LIMITS } from '../../config/constants.js';
+
+const createUser = (userId) => ({
+  userId,
+  facts: {},
+  history: [],
+  summary: null,
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+});
 
 /**
  * Obtiene o crea el perfil de un usuario.
@@ -11,21 +20,8 @@ import { LIMITS } from '../../config/constants.js';
  * @returns {Promise<Object>} Perfil del usuario
  */
 export const getOrCreateUser = async (userId) => {
-  let user = await getUserData(userId);
-  
-  if (!user) {
-    user = {
-      userId,
-      facts: {},           // Hechos de largo plazo (nombre, gustos, etc.)
-      history: [],         // Historial de mensajes
-      summary: null,       // Resumen de conversaciones antiguas
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-    await setUserData(userId, user);
-  }
-  
-  return user;
+  const user = await getUserData(userId);
+  return user || updateUserData(userId, (currentUser) => currentUser || createUser(userId));
 };
 
 /**
@@ -36,33 +32,35 @@ export const getOrCreateUser = async (userId) => {
  * @param {string} content - Contenido del mensaje
  */
 export const addMessageToHistory = async (userId, role, content) => {
-  const user = await getOrCreateUser(userId);
-  
-  user.history.push({
-    role,
-    content,
-    timestamp: new Date().toISOString(),
+  await updateUserData(userId, (currentUser) => {
+    const user = currentUser || createUser(userId);
+    user.history.push({
+      role,
+      content,
+      timestamp: new Date().toISOString(),
+    });
+
+    if (user.history.length > LIMITS.summaryThreshold) {
+      const oldMessages = user.history.slice(0, -LIMITS.recentMessages);
+      const recentMessages = user.history.slice(-LIMITS.recentMessages);
+      const summaryParts = oldMessages
+        .filter((msg) => msg.role === 'user')
+        .map((msg) => msg.content)
+        .slice(0, 5);
+
+      if (summaryParts.length > 0) {
+        const newSummary = `El usuario habló sobre: ${summaryParts.join(', ')}`;
+        user.summary = [user.summary, newSummary]
+          .filter(Boolean)
+          .join('\n')
+          .slice(-LIMITS.maxSummaryLength);
+      }
+
+      user.history = recentMessages;
+    }
+
+    return user;
   });
-
-  // Si el historial es muy largo, resumir los mensajes antiguos
-  if (user.history.length > LIMITS.summaryThreshold) {
-    const oldMessages = user.history.slice(0, -LIMITS.recentMessages);
-    const recentMessages = user.history.slice(-LIMITS.recentMessages);
-
-    // Crear resumen simple (en V2.5 podemos usar IA para resumir)
-    const summaryParts = oldMessages
-      .filter((msg) => msg.role === 'user')
-      .map((msg) => msg.content)
-      .slice(0, 5); // Tomar solo los primeros 5 mensajes de usuario
-
-    user.summary = summaryParts.length > 0
-      ? `El usuario habló sobre: ${summaryParts.join(', ')}`
-      : null;
-
-    user.history = recentMessages;
-  }
-
-  await setUserData(userId, user);
 };
 
 /**
@@ -72,7 +70,6 @@ export const addMessageToHistory = async (userId, role, content) => {
  * @param {string} message - Mensaje del usuario
  */
 export const extractFacts = async (userId, message) => {
-  const user = await getOrCreateUser(userId);
   const lowerMsg = message.toLowerCase();
 
   // Extracción simple de hechos (patrones básicos)
@@ -83,22 +80,28 @@ export const extractFacts = async (userId, message) => {
                     message.match(/mi nombre es\s+([a-záéíóúñ]+)/i) ||
                     message.match(/soy\s+([a-záéíóúñ]+)/i);
   
-  if (nameMatch) {
-    user.facts.nombre = nameMatch[1].charAt(0).toUpperCase() + nameMatch[1].slice(1);
-  }
+  const gustoMatch = lowerMsg.includes('me gusta') || lowerMsg.includes('me encanta')
+    ? message.match(/me (?:gusta|encanta)\s+(.+)/i)
+    : null;
 
-  // Detectar gustos (ejemplo simple)
-  if (lowerMsg.includes('me gusta') || lowerMsg.includes('me encanta')) {
-    const gustoMatch = message.match(/me (?:gusta|encanta)\s+(.+)/i);
-    if (gustoMatch) {
-      user.facts.gustos = user.facts.gustos || [];
-      if (!user.facts.gustos.includes(gustoMatch[1])) {
-        user.facts.gustos.push(gustoMatch[1]);
+  if (nameMatch || gustoMatch) {
+    await updateUserData(userId, (currentUser) => {
+      const user = currentUser || createUser(userId);
+
+      if (nameMatch) {
+        user.facts.nombre = nameMatch[1].charAt(0).toUpperCase() + nameMatch[1].slice(1);
       }
-    }
-  }
 
-  await setUserData(userId, user);
+      if (gustoMatch) {
+        user.facts.gustos = user.facts.gustos || [];
+        if (!user.facts.gustos.includes(gustoMatch[1])) {
+          user.facts.gustos.push(gustoMatch[1]);
+        }
+      }
+
+      return user;
+    });
+  }
 };
 
 /**

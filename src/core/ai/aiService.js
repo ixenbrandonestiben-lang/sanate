@@ -89,18 +89,22 @@ export const callAI = async ({ userMessage, facts, summary, recentHistory, perso
     return response.trim();
   } catch (error) {
     console.error('[AI_SERVICE_ERROR]', error.message);
-    
-    // Manejo de errores específicos
+
+    let message = 'No se pudo completar la solicitud al proveedor de IA.';
+    let status = 502;
+
     if (error.status === 429) {
-      throw new Error('Muchas peticiones, maje. Esperá un toque y volvé a intentar.');
-    }
-    if (error.status === 401) {
-      throw new Error('API key inválida. Revisá el .env, maje.');
-    }
-    if (error.code === 'ECONNABORTED') {
-      throw new Error('La IA se tardó mucho. Intentá de nuevo.');
+      message = 'El proveedor de IA alcanzó su límite de solicitudes. Intentá de nuevo más tarde.';
+      status = 429;
+    } else if (error.status === 401) {
+      message = 'El proveedor de IA rechazó la API key. Revisá la configuración del servidor.';
+    } else if (error.code === 'ECONNABORTED' || error.name === 'APIConnectionTimeoutError') {
+      message = 'El proveedor de IA tardó demasiado en responder.';
+      status = 504;
     }
 
-    throw new Error('Ala maje, se me fue el internet. Perame un toque y volvé a intentar.');
+    const aiError = new Error(message);
+    aiError.status = status;
+    throw aiError;
   }
 };
