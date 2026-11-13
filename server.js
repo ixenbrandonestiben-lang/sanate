@@ -26,24 +26,19 @@ const app = express();
 app.use(cors({ origin: config.corsOrigin }));
 app.use(express.json({ limit: '10kb' }));
 app.use(morgan('dev'));
+app.use(requestLogger);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.get('/api/health', (req, res) =>{
-    res.json({
-        status: 'ok',
-        message: "sanate v2 corriendo, nítido",
-        provider: config.aiProvider,
-        timeStamp: new Date().toISOString(),
-    });
-});
+app.use('/api/health', healthRoutes);
+app.use('/api/chat', chatRoutes);
 
 app.use(errorHandler);
 
 const PORT = config.port;
-app.listen(PORT, ()=>{
+app.listen(PORT, () => {
   console.log(`\n🚀 MajeBot V2 corriendo en el puerto ${PORT}, nítido`);
   console.log(`🤖 Proveedor de IA: ${config.aiProvider}`);
-  console.log(`🌐 Health check: http://localhost:${PORT}/api/health\n`);
+  console.log(`🌐 Health check: http://localhost:${PORT}/api/health`);
+  console.log(`💬 Chat endpoint: POST http://localhost:${PORT}/api/chat\n`);
 });
