@@ -1,0 +1,4 @@
+{"timestamp":"2026-11-13T01:52:30.749Z","method":"GET","url":"/api/chat","status":404,"duration":"9ms","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"}
+{"timestamp":"2026-11-13T01:52:34.243Z","method":"GET","url":"/api/chat","status":404,"duration":"3ms","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"}
+{"timestamp":"2026-11-13T01:52:50.712Z","method":"GET","url":"/api/health","status":200,"duration":"4ms","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"}
+{"timestamp":"2026-11-13T01:52:50.744Z","method":"GET","url":"/favicon.ico","status":404,"duration":"1ms","ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36"}
