@@ -17,5 +17,24 @@
     "summary": null,
     "createdAt": "2026-11-13T03:52:18.643Z",
     "updatedAt": "2026-11-13T03:52:19.714Z"
+  },
+  "357cf648-2c78-4f13-b25c-e6ad0b77b681": {
+    "userId": "357cf648-2c78-4f13-b25c-e6ad0b77b681",
+    "facts": {},
+    "history": [
+      {
+        "role": "user",
+        "content": "vs",
+        "timestamp": "2026-11-13T19:10:12.302Z"
+      },
+      {
+        "role": "assistant",
+        "content": "¡Qué onda, maje! ¿Qué querés comparar? Decime los dos elementos o temas y te echo la mano. 😎",
+        "timestamp": "2026-11-13T19:10:12.321Z"
+      }
+    ],
+    "summary": null,
+    "createdAt": "2026-11-13T19:10:08.279Z",
+    "updatedAt": "2026-11-13T19:10:12.321Z"
   }
 }
