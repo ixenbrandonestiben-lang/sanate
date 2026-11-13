@@ -37,7 +37,8 @@ const clearChatBtn = document.getElementById('clear-chat-btn');
  */
 function addMessageToUI(role, text) {
   const messageDiv = document.createElement('div');
-  messageDiv.className = `message ${role}`;
+  // Agregamos 'animate-in' para que el mensaje se deslice suavemente
+  messageDiv.className = `message ${role} animate-in`;
   
   const time = new Date().toLocaleTimeString('es-GT', { hour: '2-digit', minute: '2-digit' });
   
@@ -54,8 +55,12 @@ function addMessageToUI(role, text) {
  * Muestra el indicador de "escribiendo..."
  */
 function showTyping() {
-  typingIndicator.hidden = false;
-  botStatus.textContent = 'Escribiendo...';
+  if (typingIndicator) {
+    typingIndicator.hidden = false;
+  }
+  if (botStatus) {
+    botStatus.textContent = 'Escribiendo...';
+  }
   scrollToBottom();
 }
 
@@ -63,15 +68,21 @@ function showTyping() {
  * Oculta el indicador de "escribiendo..."
  */
 function hideTyping() {
-  typingIndicator.hidden = true;
-  botStatus.textContent = 'En línea';
+  if (typingIndicator) {
+    typingIndicator.hidden = true;
+  }
+  if (botStatus) {
+    botStatus.textContent = 'En línea';
+  }
 }
 
 /**
  * Hace scroll automático al final del chat.
  */
 function scrollToBottom() {
-  chatMessages.scrollTop = chatMessages.scrollHeight;
+  if (chatMessages) {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
 }
 
 /**
@@ -89,7 +100,8 @@ function escapeHtml(text) {
 function setLoading(isLoading) {
   messageInput.disabled = isLoading;
   sendBtn.disabled = isLoading;
-  clearChatBtn.disabled = isLoading;
+  if (clearChatBtn) clearChatBtn.disabled = isLoading;
+  
   if (!isLoading) {
     messageInput.focus();
   }
@@ -125,7 +137,7 @@ async function handleSendMessage(e) {
       body: JSON.stringify({
         userId: userId,
         message: text,
-        persona: 'MAJE' // Podrías hacer un selector en el UI para cambiar esto
+        persona: 'MAJE' 
       }),
     });
 
@@ -186,7 +198,7 @@ async function handleClearChat() {
     }
 
     chatMessages.innerHTML = `
-      <div class="message bot">
+      <div class="message bot animate-in">
         <div class="message-content">¡Memoria borrada, maje! Empezamos de cero. ¿En qué te ayudo?</div>
         <span class="message-time">Ahora</span>
       </div>
@@ -204,24 +216,32 @@ async function handleClearChat() {
 // ============================================
 
 // Enviar con el formulario (click o Enter)
-chatForm.addEventListener('submit', handleSendMessage);
+if (chatForm) {
+  chatForm.addEventListener('submit', handleSendMessage);
+}
 
 // Auto-resize del textarea al escribir
-messageInput.addEventListener('input', function() {
-  this.style.height = 'auto';
-  this.style.height = Math.min(this.scrollHeight, 120) + 'px';
-});
+if (messageInput) {
+  messageInput.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+  });
 
-// Permitir enviar con Enter (sin Shift)
-messageInput.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    chatForm.requestSubmit();
-  }
-});
+  // Permitir enviar con Enter (sin Shift)
+  messageInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      if (chatForm) chatForm.requestSubmit();
+    }
+  });
+}
 
 // Botón de borrar chat
-clearChatBtn.addEventListener('click', handleClearChat);
+if (clearChatBtn) {
+  clearChatBtn.addEventListener('click', handleClearChat);
+}
 
 // Focus inicial en el input
-messageInput.focus();
+if (messageInput) {
+  messageInput.focus();
+}

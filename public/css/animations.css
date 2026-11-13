@@ -1,0 +1,75 @@
+/* =========================================
+   1. ANIMACIONES DE ENTRADA (KEYFRAMES)
+   ========================================= */
+
+/* Animación para que los mensajes aparezcan desde abajo */
+@keyframes slideUpFade {
+    0% {
+        opacity: 0;
+        transform: translateY(15px); /* Empieza 15 pixeles más abajo */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* Termina en su posición normal */
+    }
+}
+
+/* Animación para los puntitos de "pensando" */
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+/* =========================================
+   2. CLASES DE ANIMACIÓN
+   ========================================= */
+
+/* Se aplica a cada mensaje nuevo */
+.message.animate-in {
+    animation: slideUpFade 0.3s ease-out forwards;
+}
+
+/* Contenedor de los puntitos de carga */
+.typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 12px 14px;
+    align-items: center;
+}
+
+/* Los puntitos individuales */
+.typing-indicator span {
+    width: 6px;
+    height: 6px;
+    background-color: var(--text-muted); /* Usa el color de texto secundario del tema */
+    border-radius: 50%;
+    display: inline-block;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+/* Retrasos para que los puntitos reboten en secuencia (onda) */
+.typing-indicator span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+.typing-indicator span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+/* =========================================
+   3. MICRO-INTERACCIONES DE BOTONES
+   ========================================= */
+
+/* Efecto de presionar (escala) */
+button:active {
+    transform: scale(0.95); /* Se encoge al 95% de su tamaño */
+    transition: transform 0.1s ease;
+}
+
+/* Suaviza la transición de todos los elementos interactivos */
+button, select, textarea {
+    transition: all 0.2s ease;
+}
