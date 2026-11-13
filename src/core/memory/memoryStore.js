@@ -20,15 +20,19 @@ const serializeWrite = (operation) => {
 
 /**
  * Lee toda la memoria desde el archivo JSON.
- * Si no existe, crea uno vacío.
+ * Si no existe, está vacío o corrupto, crea uno vacío.
  */
 const readMemoryFile = async () => {
   try {
     const data = await fs.readFile(MEMORY_FILE, 'utf-8');
+    if (!data || !data.trim()) {
+      await fs.writeFile(MEMORY_FILE, JSON.stringify({}, null, 2));
+      return {};
+    }
     return JSON.parse(data);
   } catch (error) {
-    if (error.code === 'ENOENT') {
-      // Archivo no existe, crear uno vacío
+    if (error.code === 'ENOENT' || error instanceof SyntaxError) {
+      // Archivo no existe o contiene JSON inválido/vacío, crear uno vacío
       await fs.writeFile(MEMORY_FILE, JSON.stringify({}, null, 2));
       return {};
     }

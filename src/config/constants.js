@@ -2,8 +2,8 @@
 // Si algo cambia, se cambia acá y en un solo lugar.
 
 export const AI_MODELS = {
-  groq: 'llama-3.3-70b-versatile',
-  openai: 'gpt-4o-mini',
+  groq: process.env.AI_MODEL || 'openai/gpt-oss-120b',
+  openai: process.env.AI_MODEL || 'gpt-4o-mini',
 };
 
 export const LIMITS = {

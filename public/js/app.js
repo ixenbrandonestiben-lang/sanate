@@ -127,10 +127,22 @@ async function handleSendMessage(e) {
       }),
     });
 
-    const result = await response.json();
+    const textData = await response.text();
+    let result = {};
+    if (textData) {
+      try {
+        result = JSON.parse(textData);
+      } catch {
+        throw new Error(`Respuesta inválida del servidor (${response.status})`);
+      }
+    }
 
     if (!response.ok) {
-      throw new Error(result.error || 'Error al enviar el mensaje');
+      throw new Error(result.error || `Error del servidor (${response.status})`);
+    }
+
+    if (!result.data || !result.data.reply) {
+      throw new Error('La respuesta del servidor no tiene el formato esperado.');
     }
 
     // 3. Mostrar respuesta del bot
@@ -157,7 +169,15 @@ async function handleClearChat() {
     const response = await fetch(`${API_URL}/${encodeURIComponent(userId)}`, {
       method: 'DELETE',
     });
-    const result = await response.json();
+    const textData = await response.text();
+    let result = {};
+    if (textData) {
+      try {
+        result = JSON.parse(textData);
+      } catch {
+        throw new Error(`Respuesta inválida del servidor (${response.status})`);
+      }
+    }
 
     if (!response.ok) {
       throw new Error(result.error || `Error ${response.status}`);

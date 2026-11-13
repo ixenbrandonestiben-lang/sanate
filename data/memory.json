@@ -1,0 +1,21 @@
+{
+  "357cf648-2c78-4f13-b25c-e6ad0b77b681": {
+    "userId": "357cf648-2c78-4f13-b25c-e6ad0b77b681",
+    "facts": {},
+    "history": [
+      {
+        "role": "user",
+        "content": "pues si maje",
+        "timestamp": "2026-11-13T03:36:03.749Z"
+      },
+      {
+        "role": "assistant",
+        "content": "¡Qué onda, maje! ¿En qué te ayudo hoy? 🚀",
+        "timestamp": "2026-11-13T03:36:03.773Z"
+      }
+    ],
+    "summary": null,
+    "createdAt": "2026-11-13T03:35:44.032Z",
+    "updatedAt": "2026-11-13T03:36:03.773Z"
+  }
+}
