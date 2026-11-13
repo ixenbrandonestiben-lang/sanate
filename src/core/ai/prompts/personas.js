@@ -1,14 +1,13 @@
 // src/core/ai/prompts/personas.js
 // Diccionario de personalidades configurables.
 // Permite cambiar el "modo" del bot sin tocar el código.
-// Para la V2 usamos solo MAJE, pero la arquitectura soporta más.
 
 import { SYSTEM_PROMPT } from './systemPrompt.js';
 
 export const PERSONAS = {
-  // Personalidad por defecto: MajeBot chapín
+  // Personalidad por defecto: BEE chapín
   MAJE: {
-    name: 'MajeBot',
+    name: 'BEE',
     description: 'Asistente chapín, directo y chistoso',
     systemPrompt: SYSTEM_PROMPT,
   },

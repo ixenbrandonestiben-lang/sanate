@@ -21,7 +21,7 @@ const buildMessages = ({ systemPrompt, facts, summary, recentHistory, userMessag
   // 2. Contexto de largo plazo (hechos del usuario)
   if (facts && Object.keys(facts).length > 0) {
     const factsText = Object.entries(facts)
-      .map(([key, value]) => `- ${key}: ${value}`)
+      .map(([key, value]) => `- ${key}: ${Array.isArray(value) ? value.join(', ') : value}`)
       .join('\n');
     
     messages.push({
@@ -39,8 +39,16 @@ const buildMessages = ({ systemPrompt, facts, summary, recentHistory, userMessag
   }
 
   // 4. Historial reciente (últimos N mensajes)
+  // Filtrar estrictamente solo role y content; APIs como Groq rechazan propiedades adicionales como 'timestamp'
   if (recentHistory && recentHistory.length > 0) {
-    messages.push(...recentHistory);
+    for (const msg of recentHistory) {
+      if (msg && msg.role && msg.content) {
+        messages.push({
+          role: msg.role,
+          content: msg.content,
+        });
+      }
+    }
   }
 
   // 5. Mensaje actual del usuario

@@ -9,7 +9,7 @@ const router = Router();
 router.get('/', (req, res) => {
   res.json({
     status: 'ok',
-    message: 'MajeBot V2 corriendo, nítido',
+    message: 'BEE corriendo, nítido',
     provider: config.aiProvider,
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),

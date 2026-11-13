@@ -5,12 +5,14 @@
 // ESTADO Y CONFIGURACIÓN
 // ============================================
 const API_URL = '/api/chat';
-let userId = localStorage.getItem('majeBot_userId');
+let userId = localStorage.getItem('bee_userId') || localStorage.getItem('majeBot_userId');
 
 // Si no hay userId, generamos uno único y lo guardamos
 if (!userId) {
   userId = crypto.randomUUID ? crypto.randomUUID() : 'user-' + Math.random().toString(36).substr(2, 9);
-  localStorage.setItem('majeBot_userId', userId);
+  localStorage.setItem('bee_userId', userId);
+} else {
+  localStorage.setItem('bee_userId', userId);
 }
 
 // ============================================

@@ -54,7 +54,7 @@ app.use(errorHandler);
 // ============================================
 const PORT = config.port;
 app.listen(PORT, () => {
-  console.log(`\n🚀 MajeBot V2 corriendo en el puerto ${PORT}, nítido`);
+  console.log(`\n🚀 BEE corriendo en el puerto ${PORT}, nítido`);
   console.log(`🤖 Proveedor de IA: ${config.aiProvider}`);
   console.log(`🌐 Health check: http://localhost:${PORT}/api/health`);
   console.log(`💬 Chat endpoint: POST http://localhost:${PORT}/api/chat\n`);

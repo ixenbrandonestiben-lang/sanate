@@ -105,13 +105,16 @@ export const extractFacts = async (userId, message) => {
 };
 
 /**
- * Obtiene el historial reciente de un usuario (últimos N mensajes).
+ * Obtiene el historial reciente de un usuario (últimos N mensajes) formateado para el modelo.
  * @param {string} userId - ID del usuario
- * @returns {Promise<Array>} Historial reciente
+ * @returns {Promise<Array<{role: string, content: string}>>} Historial reciente
  */
 export const getRecentHistory = async (userId) => {
   const user = await getOrCreateUser(userId);
-  return user.history.slice(-LIMITS.recentMessages);
+  return user.history.slice(-LIMITS.recentMessages).map((msg) => ({
+    role: msg.role,
+    content: msg.content,
+  }));
 };
 
 /**
