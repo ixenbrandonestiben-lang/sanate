@@ -44,14 +44,25 @@ function addMessageToUI(role, text) {
   // 👇 AQUÍ ESTÁ LA MAGIA: Pasamos el texto por el traductor
   const formattedText = parseMarkdown(text);
   
-  messageDiv.innerHTML = `
+    messageDiv.innerHTML = `
     <div class="message-content">${formattedText}</div>
     <span class="message-time">${time}</span>
   `;
   
+  // 👇 NUEVO: Si es el bot, le agregamos el botón para escuchar
+  if (role === 'bot') {
+      const speakBtn = document.createElement('button');
+      speakBtn.className = 'speak-btn';
+      speakBtn.innerHTML = '🔊 Escuchar';
+      speakBtn.type = 'button'; // Importante para que no envíe el formulario
+      speakBtn.title = 'Leer mensaje en voz alta';
+      messageDiv.appendChild(speakBtn);
+  }
+
   chatMessages.appendChild(messageDiv);
   scrollToBottom();
 }
+
 /**
  * Muestra el indicador de "escribiendo..."
  */
