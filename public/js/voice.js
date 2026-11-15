@@ -8,8 +8,8 @@ if (SpeechRecognition) {
     const recognition = new SpeechRecognition();
     
     // Configuración del robot
-    recognition.lang = 'es-GT'; // Español (Guatemala) - Puedes cambiarlo a 'es-MX' o 'es-ES'
-    recognition.continuous = false; // Se detiene cuando dejas de hablar
+    recognition.lang = 'es-GT'; // Español (Guatemala)
+    recognition.continuous = true; // 👈 CAMBIO: true para que no se detenga a cada rato si haces pausas
     recognition.interimResults = true; // Muestra el texto mientras hablas (en tiempo real)
 
     // Referencias a los elementos del HTML
@@ -17,6 +17,7 @@ if (SpeechRecognition) {
     const messageInput = document.getElementById('message-input');
 
     let isRecording = false;
+    let finalTranscript = ''; // 👈 NUEVO: La "Hoja Oficial" (memoria a largo plazo)
 
     // 2. Qué hacer cuando el botón es presionado
     voiceBtn.addEventListener('click', () => {
@@ -30,35 +31,40 @@ if (SpeechRecognition) {
     // 3. Cuando el robot empieza a escuchar
     recognition.onstart = () => {
         isRecording = true;
-        voiceBtn.classList.add('recording'); // Le pone el disfraz rojo que late
+        voiceBtn.classList.add('recording'); 
         voiceBtn.title = 'Escuchando... (clic para detener)';
         messageInput.placeholder = 'Te estoy escuchando...';
+        
+        // 👈 NUEVO: Guardamos lo que ya había escrito para no borrarlo al empezar
+        finalTranscript = messageInput.value ? messageInput.value + ' ' : '';
     };
 
     // 4. Cuando el robot deja de escuchar
     recognition.onend = () => {
         isRecording = false;
-        voiceBtn.classList.remove('recording'); // Le quita el disfraz rojo
+        voiceBtn.classList.remove('recording'); 
         voiceBtn.title = 'Dictar por voz';
         messageInput.placeholder = 'Escribe tu mensaje o usa el micrófono...';
     };
 
-    // 5. Cuando el robot entiende lo que dices
+    // 5. Cuando el robot entiende lo que dices (Lógica a prueba de duplicados)
     recognition.onresult = (event) => {
-        let transcript = '';
-        
-        // Recorremos todos los resultados que el robot entendió
+        let interimTranscript = ''; // La "Hoja Borrador" (texto temporal)
+
+        // Recorremos los resultados
         for (let i = event.resultIndex; i < event.results.length; i++) {
-            transcript += event.results[i][0].transcript;
+            const transcript = event.results[i][0].transcript;
+            
+            if (event.results[i].isFinal) {
+                finalTranscript += transcript; // Lo confirmamos en la Hoja Oficial
+            } else {
+                interimTranscript += transcript; // Lo guardamos en la Hoja Borrador
+            }
         }
         
-        // Ponemos el texto en la cajita de escribir
-        // Si ya había texto escrito, le agregamos un espacio antes
-        if (messageInput.value) {
-            messageInput.value = messageInput.value + ' ' + transcript;
-        } else {
-            messageInput.value = transcript;
-        }
+        // 👈 LA MAGIA: Reemplazamos el texto de la cajita con (Oficial + Borrador)
+        // Esto evita por completo que se duplique, porque nunca sumamos sobre lo que ya había
+        messageInput.value = finalTranscript + interimTranscript;
         
         // Ajustamos la altura del textarea automáticamente
         messageInput.style.height = 'auto';
@@ -68,13 +74,12 @@ if (SpeechRecognition) {
     // 6. Si el robot no entiende o hay un error
     recognition.onerror = (event) => {
         console.error('[VOICE ERROR]', event.error);
-        isRecording = false;
-        voiceBtn.classList.remove('recording');
         
-        if (event.error === 'no-speech') {
-            alert('No te escuché. Intenta hablar más fuerte o revisar tu micrófono.');
-        } else if (event.error === 'not-allowed') {
+        // Solo mostramos alertas para errores críticos, ignoramos los ruidos de fondo
+        if (event.error === 'not-allowed') {
             alert('Necesitas darme permiso para usar el micrófono. Revisa los permisos de tu navegador.');
+            isRecording = false;
+            voiceBtn.classList.remove('recording');
         }
     };
 

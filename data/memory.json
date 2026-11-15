@@ -36,5 +36,34 @@
     "summary": null,
     "createdAt": "2026-11-13T19:10:08.279Z",
     "updatedAt": "2026-11-13T19:10:12.321Z"
+  },
+  "93ba8483-2654-4a1f-be3d-1c2c585a261c": {
+    "userId": "93ba8483-2654-4a1f-be3d-1c2c585a261c",
+    "facts": {},
+    "history": [
+      {
+        "role": "user",
+        "content": "Boss APA qué onda.Hueco.fine touch dice",
+        "timestamp": "2026-11-15T23:18:43.759Z"
+      },
+      {
+        "role": "assistant",
+        "content": "¡Qué onda maje! Soy BEE. ¿Qué necesitás? 🌟",
+        "timestamp": "2026-11-15T23:18:43.797Z"
+      },
+      {
+        "role": "user",
+        "content": "Eh busca en la web y búscame la letra de cualquier canción.",
+        "timestamp": "2026-11-15T23:19:40.631Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Maje, aquí tienes un pedacito de la canción “La Bicicleta” de Carlos Vives y Shakira (menos de 90 caracteres):\n\n> “Yo quiero que tú seas mi bicicleta, que me lleve al ritmo del mar…”\n\nSi querés más, te recomiendo buscar la letra completa en algún sitio de letras. 🎶",
+        "timestamp": "2026-11-15T23:19:40.807Z"
+      }
+    ],
+    "summary": null,
+    "createdAt": "2026-11-15T23:18:37.952Z",
+    "updatedAt": "2026-11-15T23:19:40.807Z"
   }
 }
