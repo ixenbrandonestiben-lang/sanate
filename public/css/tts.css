@@ -1,0 +1,38 @@
+/* =========================================
+   BOTÓN DE ESCUCHAR (TEXT-TO-SPEECH)
+   ========================================= */
+
+/* El botón de la bocina */
+.speak-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s ease;
+}
+
+.speak-btn:hover {
+    background-color: var(--bg-select);
+    color: var(--text-main);
+}
+
+/* Estado cuando está hablando */
+.speak-btn.speaking {
+    color: #3b82f6; /* Azul brillante */
+    border-color: #3b82f6;
+    animation: pulse-blue 1.5s infinite;
+}
+
+/* Animación de latido azul (reutilizamos la lógica de la voz) */
+@keyframes pulse-blue {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+    70% { box-shadow: 0 0 0 6px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
