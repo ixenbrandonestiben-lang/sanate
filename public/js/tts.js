@@ -56,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
         utterance.onend = () => {
             speakBtn.classList.remove('speaking');
             speakBtn.innerHTML = '🔊 Escuchar';
+
+            window.dispatchEvent(new CustomEvent('tts-ficiched'));
         };
 
         // Si hay un error

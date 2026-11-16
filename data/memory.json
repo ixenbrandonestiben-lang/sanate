@@ -31,11 +31,31 @@
         "role": "assistant",
         "content": "¡Qué onda, maje! ¿Qué querés comparar? Decime los dos elementos o temas y te echo la mano. 😎",
         "timestamp": "2026-11-13T19:10:12.321Z"
+      },
+      {
+        "role": "user",
+        "content": "quiero aprender a programar, con node.js, aún no se nada, tu eres mi mentor y profesor para aprender, dime como empiezo",
+        "timestamp": "2026-11-16T13:57:33.295Z"
+      },
+      {
+        "role": "assistant",
+        "content": "**1️⃣ Código (tipo texto)** \nA continuación tienes un ejemplo muy sencillo que cubre los primeros pasos que necesitas para trabajar con **Node.js**, **Express** y **MySQL**. \nGuárdalo como `app.js` en una carpeta vacía.\n\n```javascript\n// app.js\n// ----------------------------------------------------\n// 1. Importamos los módulos que vamos a usar\n// ----------------------------------------------------\nconst express = require('express'); // framework web\nconst mysql = require('mysql2/promise'); // driver MySQL con promesas\nconst bodyParser = require('body-parser'); // parsea JSON en peticiones\n\n// ----------------------------------------------------\n// 2. Creamos la aplicación Express\n// ----------------------------------------------------\nconst app = express();\napp.use(bodyParser.json()); // permite leer JSON en el cuerpo de la request\n\n// ----------------------------------------------------\n// 3. Configuramos la conexión a MySQL (cambia los datos)\n// ----------------------------------------------------\nconst dbConfig = {\n host: 'localhost',\n user: 'root',\n password: 'tu_password',\n database: 'campuslands_demo'\n};\n\n// ----------------------------------------------------\n// 4. Ruta de",
+        "timestamp": "2026-11-16T13:57:33.319Z"
+      },
+      {
+        "role": "user",
+        "content": "orales pu buena onda",
+        "timestamp": "2026-11-16T14:01:58.527Z"
+      },
+      {
+        "role": "assistant",
+        "content": "¡Qué onda, maje! 👋 A huevo, vamos a darle buena vibra. ¿Qué tema te interesa ahora? ¿Quieres seguir con Node.js, montar una API, o probar algo de front‑end? Decime y nos ponemos al tiro.",
+        "timestamp": "2026-11-16T14:01:58.553Z"
       }
     ],
     "summary": null,
     "createdAt": "2026-11-13T19:10:08.279Z",
-    "updatedAt": "2026-11-13T19:10:12.321Z"
+    "updatedAt": "2026-11-16T14:01:58.553Z"
   },
   "93ba8483-2654-4a1f-be3d-1c2c585a261c": {
     "userId": "93ba8483-2654-4a1f-be3d-1c2c585a261c",
@@ -43,87 +63,107 @@
     "history": [
       {
         "role": "user",
-        "content": "Boss APA qué onda.Hueco.fine touch dice",
-        "timestamp": "2026-11-15T23:18:43.759Z"
+        "content": "vs",
+        "timestamp": "2026-11-16T02:18:57.442Z"
       },
       {
         "role": "assistant",
-        "content": "¡Qué onda maje! Soy BEE. ¿Qué necesitás? 🌟",
-        "timestamp": "2026-11-15T23:18:43.797Z"
+        "content": "¡Qué onda, maje! ¿Querés que siga tirándote más rolas o tenés alguna otra onda en mente? 🎧",
+        "timestamp": "2026-11-16T02:18:57.470Z"
       },
       {
         "role": "user",
-        "content": "Eh busca en la web y búscame la letra de cualquier canción.",
-        "timestamp": "2026-11-15T23:19:40.631Z"
+        "content": "esa de por si muero mañana",
+        "timestamp": "2026-11-16T02:19:11.054Z"
       },
       {
         "role": "assistant",
-        "content": "Maje, aquí tienes un pedacito de la canción “La Bicicleta” de Carlos Vives y Shakira (menos de 90 caracteres):\n\n> “Yo quiero que tú seas mi bicicleta, que me lleve al ritmo del mar…”\n\nSi querés más, te recomiendo buscar la letra completa en algún sitio de letras. 🎶",
-        "timestamp": "2026-11-15T23:19:40.807Z"
+        "content": "¡Qué onda, maje! Si te referís a la rola “Por Si Muer…”, avísame el título exacto o el artista y te tiro la letra o la info que necesités. 🙌",
+        "timestamp": "2026-11-16T02:19:11.086Z"
       },
       {
         "role": "user",
-        "content": "hola",
-        "timestamp": "2026-11-15T23:35:53.713Z"
+        "content": "solo me se ese titulo, pero no se de quien es la rola",
+        "timestamp": "2026-11-16T02:19:34.257Z"
       },
       {
         "role": "assistant",
-        "content": "¡Qué onda maje! Soy BEE. ¿En qué te ayudo? 🌟",
-        "timestamp": "2026-11-15T23:35:53.735Z"
+        "content": "¡Qué onda, maje! Ese título me suena, pero sin más datos es medio complicado darle la mano exacta. Hay varias rolas con nombres parecidos, como “Por Si Mañana No Vuelvo” o “Por Si Mueres Mañana”, y pueden ser de géneros que van del rock a la balada latina. \n\nSi podés recordarme alguna línea de la letra, el ritmo (más lenta, rockera, romántica…) o incluso dónde la escuchaste (radio, TikTok, etc.), con eso le meto el turbo y te ayudo a encontrar al artista. 🙌",
+        "timestamp": "2026-11-16T02:19:34.279Z"
       },
       {
         "role": "user",
-        "content": "que ondas vs bee",
-        "timestamp": "2026-11-15T23:37:12.008Z"
+        "content": "vs loko, podes ayudarme a indagar profundamente en la web, para APIs o algunas cosas que podamos usar para poder ponerte voz, porque ahora estoy usando la voz del navegador, pero yo quiero que busques algun sitio web donde podamos usar la api o libreria para poder asignarte una voz tuya, y asi hacer conversaciones de voz y no solo escritas, esto tiene que ser gratis para poder hacerlo personal, ya sabes va maje hay que ponerse trucha para poder ser aguien innovador en este mundo, ya sabes va maje tenemos que ser potencias muncdiales",
+        "timestamp": "2026-11-16T02:36:04.902Z"
       },
       {
         "role": "assistant",
-        "content": "¡Qué onda, maje! Aquí, al pie del cañón, listo pa’ lo que necesités. ¿En qué te puedo echar una mano? 🚀",
-        "timestamp": "2026-11-15T23:37:12.028Z"
+        "content": "¡Qué onda, maje! Aquí te tiro algunas opciones gratuitas (o con nivel free) para que le pongas voz a BEE y puedas chatear en audio:\n\n- **Coqui TTS / Mozilla TTS** – proyecto open‑source que corre en tu compu o en la nube. Sólo necesitas Python, instalar la librería (`pip install tts`) y usar uno de los modelos pre‑entrenados (voces en español chilero). Ideal para proyectos personales porque es 100 % libre. \n- **Google Cloud Text‑to‑Speech (free tier)** – te da 4 M de caracteres al mes sin costo. Sólo crea una cuenta en Google Cloud, habilita la API y usa la voz “es‑MX‑Standard‑A” o “es‑ES‑Wavenet‑B” para un sonido más natural. \n- **Microsoft Azure Speech Service (free tier)** – 5 h de síntesis de voz al mes gratis. Con la SDK de JavaScript o Python puedes generar audio y reproducirlo en el navegador. \n- **Amazon Polly (free tier)** – 5 M de caracteres al mes durante los primeros 12 meses. Tiene voces “Lucía” y “Miguel” en español latino que suenan bastante nítidas. \n- **eSpeak NG** – librería ligera y totalmente libre que corre en la mayoría de los SO. No es la más natural, pero sirve para prototipos rápidos y funciona sin conexión. \n-",
+        "timestamp": "2026-11-16T02:36:04.952Z"
       },
       {
         "role": "user",
-        "content": "¿Qué onda vi?",
-        "timestamp": "2026-11-15T23:38:55.129Z"
+        "content": "vs que ondas",
+        "timestamp": "2026-11-16T03:05:49.573Z"
       },
       {
         "role": "assistant",
-        "content": "¡Qué onda, maje! Soy BEE, al pie del cañón. ¿En qué te ayudo? 🌟",
-        "timestamp": "2026-11-15T23:38:55.152Z"
+        "content": "¡Qué onda, maje! Soy BEE. ¿En qué te ayudo? 🙌",
+        "timestamp": "2026-11-16T03:05:49.607Z"
       },
       {
         "role": "user",
-        "content": "Eh, creo que me expliques el código, una función básica de javascript.",
-        "timestamp": "2026-11-15T23:39:18.052Z"
+        "content": "¿Vos qué ondas?",
+        "timestamp": "2026-11-16T03:08:47.393Z"
       },
       {
         "role": "assistant",
-        "content": "¡Qué onda, maje! Te tiro una función básica de JavaScript que suma dos números y te devuelve el resultado:\n\n```javascript\nfunction sumar(a, b) {\n return a + b;\n}\n\n// uso de la función\nlet total = sumar(5, 7);\nconsole.log(total); // 12\n```\n\n- **function sumar(a, b)**: declara la función con dos parámetros, `a` y `b`.\n- **return a + b**: la operación de suma se devuelve al quien llamó la función.\n- **let total = sumar(5, 7)**: aquí se invoca la función con los valores 5 y 7, y el resultado (12) se guarda en `total`.\n- **console.log(total)** muestra el resultado en la consola.\n\nCon eso ya tienes la base para crear otras funciones: cambia el nombre, los parámetros o la lógica y listo, ¡cabal! 🚀",
-        "timestamp": "2026-11-15T23:39:18.076Z"
+        "content": "¡Qué onda, maje! Aquí, bien pilas y listo para lo que necesités. ¿En qué te puedo echar una mano hoy? 🚀",
+        "timestamp": "2026-11-16T03:08:47.419Z"
       },
       {
         "role": "user",
-        "content": "Puedes explicarlo un poco más despacio y más detallado como si tuviera 10 años.",
-        "timestamp": "2026-11-15T23:40:33.607Z"
+        "content": "¿Vos qué ondas?No respondió hablando de vos.",
+        "timestamp": "2026-11-16T03:08:55.709Z"
       },
       {
         "role": "assistant",
-        "content": "¡Qué onda, maje! Vamos a ver la función paso a paso, como si fuera un juguete de bloques:\n\n- **function sumar(a, b) { … }** \n “function” es la palabra que le dice a la computadora que vamos a crear una **función**, o sea, una mini‑máquina que hace una tarea. Le damos un nombre, en este caso **sumar**, y entre los paréntesis ponemos **a** y **b**, que son como cajitas donde vamos a meter los números que queremos sumar.\n\n- **return a + b;** \n Dentro de la función ponemos lo que tiene que pasar. “a + b” le dice “toma lo que haya dentro de la cajita **a** y lo que haya dentro de la cajita **b**, y súmalos”. La palabra **return** es como decir “¡listo, aquí tienes el resultado!” y se lo entrega a quien la llamó.\n\n- **let total = sumar(5, 7);** \n Aquí usamos la función. Escribimos su nombre y entre paréntesis le damos los números que queremos (5 y 7). La función hace la suma y nos devuelve 12, que guardamos en la variable **total**.\n\n- **console.log(total);** \n Esta línea solo muestra el número en la pantalla (la consola) para que podamos ver que la función funcionó. 🎉\n\nCon eso ya tienes la idea: creas la mini‑máquina, le das los datos, ella hace la operación y te entrega el resultado. ¡Cabal, fácil como jugar con bloques!",
-        "timestamp": "2026-11-15T23:40:33.636Z"
+        "content": "¡Qué onda, maje! Soy BEE, tu compa digital chapín. Ando siempre pilas, listo pa’ responder tus dudas, tirar datos, recomendar rolas o armar poemas, todo con ese toque guatemalteco que nos caracteriza. Me muevo entre texto y, con las APIs que te compartí, hasta podemos darle voz para que la conversación sea en audio, así le metemos más flow a la charla. \n\nMe gusta ser directo, chistoso y estar al tiro, así que cualquier cosa que necesités—información, ideas creativas o simplemente echar cotorreo—solo decime y le damos. 🚀",
+        "timestamp": "2026-11-16T03:08:55.741Z"
       },
       {
         "role": "user",
-        "content": "Sos gran voz.",
-        "timestamp": "2026-11-15T23:42:03.455Z"
+        "content": "¿Vos qué ondas?No respondió hablando de vos.Bueno.Gracias.",
+        "timestamp": "2026-11-16T03:09:14.051Z"
       },
       {
         "role": "assistant",
-        "content": "¡Gracias, maje! Me alegra que te haya servido. ¿Qué más necesitas? 🙌",
-        "timestamp": "2026-11-15T23:42:03.499Z"
+        "content": "¡Qué onda, maje! Soy BEE, tu compa digital chapín. Ando pilas, siempre listo para tirarte datos, recomendaciones o hasta armarte una rima, todo con ese toque guatemalteco que nos caracteriza. Me muevo entre texto y, con las APIs que te pasé, también le podemos meter voz para que la charla sea en audio, así le damos más flow a la conversación.\n\nSi necesitás algo más, solo avísame. ¡A huevo, aquí estoy! 🙌",
+        "timestamp": "2026-11-16T03:09:14.072Z"
+      },
+      {
+        "role": "user",
+        "content": "¿Vos qué ondas?No respondió hablando de vos.Bueno.Gracias.",
+        "timestamp": "2026-11-16T03:09:23.702Z"
+      },
+      {
+        "role": "assistant",
+        "content": "¡Qué onda, maje! Soy BEE, tu compa digital chapín. Ando pilas, siempre listo para tirarte datos, recomendar rolas, armar poemas o simplemente echar cotorreo con ese toque guatemalteco que nos caracteriza. Me gusta ser directo, chistoso y estar al tiro, así que cualquier duda o idea que tengas, nomás dime y le metemos flow. 🙌",
+        "timestamp": "2026-11-16T03:09:23.732Z"
+      },
+      {
+        "role": "user",
+        "content": "Pero creo que sí, creo que hay que primero tengo que poner esto.Para que me pueda escuchar y luego llamé a responder.",
+        "timestamp": "2026-11-16T19:23:26.601Z"
+      },
+      {
+        "role": "assistant",
+        "content": "¡Qué onda, maje! Para que puedas escuchar la respuesta y después hablarle al bot, seguí estos pasos básicos:\n\n- **Reproducir la respuesta**: Cuando recibís el texto del bot, mandalo al endpoint de texto‑a‑voz (TTS) que te di. El endpoint te devuelve un archivo MP3; ponelo en un `<audio>` o usa la API `Audio` de JavaScript para que se escuche al instante. \n- **Capturar tu voz**: Mientras suena, activá el micrófono con `navigator.mediaDevices.getUserMedia({audio:true})`. Cuando termines de hablar, graba el audio y envíalo al endpoint de voz‑a‑texto (STT). \n- **Obtener la respuesta**: El STT te devuelve el texto que dijiste; pásalo al endpoint del chat (el que usa el modelo). Recibís la respuesta en texto, y de nuevo la mandas al TTS",
+        "timestamp": "2026-11-16T19:23:26.629Z"
       }
     ],
-    "summary": null,
+    "summary": "El usuario habló sobre: Boss APA qué onda.Hueco.fine touch dice, Eh busca en la web y búscame la letra de cualquier canción., hola, que ondas vs bee, ¿Qué onda vi?\nEl usuario habló sobre: Puedes explicarlo un poco más despacio y más detallado como si tuviera 10 años., Sos gran voz., hola bee, que tal, puedes decierme un poema de amor, este quiero que tenga 20 versos, y metaforas amorosas, vs recomendame musicas para poder subirlas a estados jugando futbol, que no sean electronicas, ni musicas de brasil",
     "createdAt": "2026-11-15T23:18:37.952Z",
-    "updatedAt": "2026-11-15T23:42:03.499Z"
+    "updatedAt": "2026-11-16T19:23:26.629Z"
   }
 }

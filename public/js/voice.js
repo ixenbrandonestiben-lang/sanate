@@ -45,6 +45,8 @@ if (SpeechRecognition) {
         voiceBtn.classList.remove('recording'); 
         voiceBtn.title = 'Dictar por voz';
         messageInput.placeholder = 'Escribe tu mensaje o usa el micrófono...';
+
+        window.dispatchEvent(new CustomEvent('voice-stopped'));
     };
 
     // 5. Cuando el robot entiende lo que dices (Lógica a prueba de duplicados)

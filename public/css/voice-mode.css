@@ -1,0 +1,6 @@
+button#voice-mode-btn.active{
+    background-color: #3b82f6;
+    color: #ffffff;
+    border-color: #3b82f6;
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+}
